@@ -80,6 +80,7 @@ class UsersSeeder extends Seeder
                 'username' => $name,
                 'fullname' => $fullName,
                 'role' => Arr::random($roleName),
+                'handphone' => $faker->cellphoneNumber,
                 'company_id' => $companies->random()->id,
                 'email_verified_at' => now(),
                 'email' => strtolower($name) . '@gmail.com',

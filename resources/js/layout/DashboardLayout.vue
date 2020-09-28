@@ -20,21 +20,18 @@
 
       <dashboard-content @click="toggleSidebar" />
 
-      <dashboard-footer />
     </div>
   </div>
 </template>
 
 <script>
 import TopNavbar from './TopNavbar.vue';
-import DashboardFooter from './Footer.vue';
 import DashboardContent from './Content.vue';
 import MobileMenu from './MobileMenu.vue';
 
 export default {
   components: {
-    TopNavbar,
-    DashboardFooter,
+    TopNavbar,    
     DashboardContent,
     MobileMenu,
   },

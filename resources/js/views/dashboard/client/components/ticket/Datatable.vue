@@ -35,6 +35,7 @@
             <b-icon icon="chat-dots" font-scale="2" variant="secondary" />
           </button> -->
           <button class="btn btn-warning btn-sm" @click="detail(row)">Detail</button>
+          <button class="btn btn-warning btn-sm" @click="destroy(row)">Delete</button>
         </template>
       </b-table>
     </div>
@@ -131,6 +132,10 @@ export default {
         },
       });
     },
+    destroy(row) {
+      this.selected = row.item;
+      this.$emit('destroy', this.selected);
+    }
   },
 };
 </script>

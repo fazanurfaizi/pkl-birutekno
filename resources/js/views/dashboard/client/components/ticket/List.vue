@@ -19,11 +19,36 @@
               @search="handleSearch"
               @sort="handleSort"
               @detail="handleDetail"
+              @destroy="showDeleteConfirm"
             />
           </div>
         </div>
       </div>
     </div>
+    <b-modal v-model="confirmModal" title="Are You sure">
+      <p>Delete a Ticket</p>
+      <template v-slot:modal-footer>
+        <div class="float-right">
+          <b-button
+            variant="secondary"
+            size="sm"
+            @click="confirmModal=false"
+          >
+            Close
+          </b-button>
+        </div>
+        <div class="float-left">
+          <b-button
+            variant="secondary"
+            size="sm"
+            data-save
+            @click="handleDestroy"
+          >
+            Yes
+          </b-button>
+        </div>
+      </template>
+    </b-modal>
   </div>
 </template>
 
@@ -60,6 +85,7 @@ export default {
       sortBy: 'created_at',
       sortByDesc: false,
       item: {},
+      confirmModal: false
     };
   },
   created() {
@@ -116,6 +142,23 @@ export default {
     handleDetail(val) {
       this.getDetailTicket(val.id);
     },
+    showDeleteConfirm(val) {
+      this.confirmModal = true;
+      axios.get(`/api/tickets/${val.id}`)
+        .then((response) => {
+          this.item = response.data.data;
+        });
+    },
+    handleDestroy() {
+      axios.delete(`/api/tickets/${this.item.id}`)
+        .then(() => {
+          this.confirmModal = false;
+          this.loadTicketsData()
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   },
 };
 </script>

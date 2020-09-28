@@ -25,6 +25,7 @@
 
             <div class="form-check">
               <button type="button" class="btn btn-login float-right" @click="loginUser">Submit</button>
+              <router-link to="/forgot-password">Forgot password?</router-link>              
             </div>
 
           </v-form>

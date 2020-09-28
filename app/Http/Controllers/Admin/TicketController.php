@@ -9,7 +9,7 @@ use App\Models\Ticket;
 class TicketController extends Controller
 {
     public function index(Request $request) {
-        $tickets = Ticket::orderBy('status', 'DESC')
+        $tickets = Ticket::orderBy('status', 'ASC')
             ->orderBy('id', 'DESC')
             ->when($request->q, function($tickets) {
                 $tickets = $tickets->where('subject', 'LIKE', '%' . request()->q . '%')

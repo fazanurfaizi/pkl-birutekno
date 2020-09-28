@@ -18,7 +18,7 @@ class TicketController extends Controller
     public function index(Request $request)
     {
         $tickets = Ticket::where('user_id', auth()->user()->id)
-            ->orderBy('status', 'DESC')
+            ->orderBy('status', 'ASC')
             ->orderBy('id', 'DESC')
             ->when($request->q, function($tickets) {
                 $tickets = $tickets->where('subject', 'LIKE', '%' . request()->q . '%')
@@ -42,12 +42,25 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $rules = [
             'project_id' => 'required',
             'subject' => 'required|string',
             'description' => 'sometimes',
-            'file' => 'sometimes|mimes:jpeg,jpg,png,gif,pdf,docs,csv,txt,xlx,xls,docs',
-        ]);
+        ];                
+
+        $filename = '';
+
+        if($request->file()) {
+            $fileRules = [
+                'file' => 'mimes:jpeg,jpg,png,gif,pdf,docs,csv,txt,xlx,xls,docs',
+            ];
+
+            array_merge($rules, $fileRules);
+            $filename = time().'_'.$request->file->getClientOriginalName();
+            $request->file('file')->storeAs('uploads', $filename, 'public');            
+        }
+
+        $request->validate($rules);
 
         $ticket = new Ticket([
             'user_id' => auth()->user()->id,
@@ -56,12 +69,7 @@ class TicketController extends Controller
             'description' => $request->description,
         ]);
 
-        if($request->file()) {
-            $filename = time().'_'.$request->file->getClientOriginalName();
-            $request->file('file')->storeAs('uploads', $filename, 'public');
-
-            $ticket->file = $filename;
-        }
+        $ticket->file = $filename;
 
         $ticket->save();
 

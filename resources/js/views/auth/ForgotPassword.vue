@@ -27,6 +27,7 @@
                     </div>
                     <div class="form-group">
                       <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="button" @click="sendForgotPassword">
+                      <router-link class="btn btn-primary btn-block mt-5" type="button" to="/login">Login</router-link>
                     </div>
                   </v-form>
                 </div>

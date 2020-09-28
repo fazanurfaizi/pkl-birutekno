@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Company;
+use Faker\Factory;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -15,7 +16,9 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {                
+    {            
+        $faker = Factory::create();
+        
         $this->call(PermissionSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(CompaniesSeeder::class);        
@@ -28,6 +31,7 @@ class DatabaseSeeder extends Seeder
             'fullname' => 'admin birutekno',
             'username' => 'admin',
             'email' => 'admin@gmail.com',
+            'handphone' => $faker->phoneNumber,
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
             'role' => 'admin',
@@ -38,6 +42,7 @@ class DatabaseSeeder extends Seeder
             'fullname' => 'client birutekno',
             'username' => 'client',
             'email' => 'client@gmail.com',
+            'handphone' => $faker->phoneNumber,
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
             'role' => 'client',
@@ -48,6 +53,7 @@ class DatabaseSeeder extends Seeder
             'fullname' => 'employee birutekno',
             'username' => 'employee',
             'email' => 'employee@gmail.com',
+            'handphone' => $faker->phoneNumber,
             'password' => Hash::make('password'),
             'email_verified_at' => now(),
             'role' => 'employee',

@@ -16,7 +16,7 @@
             type="text"
             class="form-control"
             placeholder="Enter your name"
-            name="name"
+            name="fullname"
             disabled
           />
 
@@ -149,7 +149,7 @@ export default {
       ticket: {
         subject: '',
         description: '',
-        file: '',
+        file: null,
         project_id: '',
       },
       projects: [],
@@ -184,11 +184,7 @@ export default {
     prepareFormData() {
       const formData = new FormData();
       Object.keys(this.ticket).forEach((key) => {
-        if (key === 'body') {
-          formData.append(key, JSON.stringify(this.ticket[key]));
-        } else {
-          formData.append(key, this.ticket[key]);
-        }
+        formData.append(key, this.ticket[key]);
       });
       return formData;
     },
@@ -196,7 +192,7 @@ export default {
       this.ticket = {
         subject: '',
         description: '',
-        file: '',
+        file: null,
         project_id: '',
       };
       this.fileName = '';
@@ -213,7 +209,8 @@ export default {
           this.resetForm();
           this.confirmModal = false;
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error)
           this.$swal('Failed!', 'Tampaknya ada kesalahan dari server', 'error');
           this.resetForm();
           this.confirmModal = false;

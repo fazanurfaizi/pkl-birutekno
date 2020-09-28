@@ -9,6 +9,7 @@
             type="text"
             label="Username"
             placeholder="Username"
+            readonly
           />
         </div>
         <div class="col-md-6">
@@ -17,18 +18,23 @@
             type="email"
             label="Email"
             placeholder="Email"
+            readonly
           />
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <fg-input
             v-model="userDetails.fullname"
             type="text"
             label="FullName"
             placeholder="FullName"
           />
+        </div>
+        <div class="col-md-6">
+          <label for="handphone">Handphone</label>
+          <VuePhoneNumberInput v-model="userDetails.handphone" />
         </div>
       </div>
 
@@ -106,10 +112,12 @@
 import { mapActions, mapGetters } from 'vuex';
 import PasswordValidationMixin from '@/mixins/passwordValidationMixin';
 import Card from '@/components/UIComponents/Cards/Card.vue';
+import VuePhoneNumberInput from 'vue-phone-number-input';
 
 export default {
   components: {
     Card,
+    VuePhoneNumberInput
   },
   mixins: [PasswordValidationMixin],
   data() {
