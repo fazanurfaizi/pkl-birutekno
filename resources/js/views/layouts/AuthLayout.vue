@@ -1,10 +1,10 @@
 <template>
-    <v-content>
-        <h1>Auth layout</h1>
-        <router-view></router-view>
-    </v-content>
+  <v-content>
+    <h1>Auth layout</h1>
+    <router-view />
+  </v-content>
 </template>
 
 <script>
-    export default {}
+export default {};
 </script>

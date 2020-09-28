@@ -21,12 +21,16 @@ class UserResource extends JsonResource
         $userPermissions = $rolesPermissions->merge($this->permissions->pluck('slug'));
 
         return [
-            'name' => $this->name,
+            'fullname' => $this->fullname,
             'username' => $this->username,
             'email' => $this->email,
             'created_at' => $this->created_at->format('Y-m-d'),
-            'roles' => $roles,
+            'role' => $this->role,
             'permissions' => $userPermissions,
+            'openTicketCount' => $this->tickets->where('status', 'open')->count(),
+            'closedTicketCount' => $this->tickets->where('status', 'closed')->count(),
+            'projectCount' => $this->projects->count(),
+            'company' => $this->company
         ];
     }
 }

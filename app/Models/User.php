@@ -22,10 +22,12 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
+        'company_id',
         'username',
-        'name',
+        'fullname',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -72,5 +74,46 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function sendEmailVerificationNotification() {
         $this->notify(new VerifyNotification());
+    }
+
+    /**
+     * Check if user has a permission
+     * @param String
+     * @return bool
+     */
+    public function hasPermission($permission): bool
+    {
+        foreach ($this->roles as $role) {
+            if (in_array($permission, $role->permissions->pluck('name')->toArray())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        foreach ($this->roles as $role) {
+            if ($role->isAdmin()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function tickets() {
+        return $this->hasMany(Ticket::class);
+    }
+
+    public function projects() {
+        return $this->hasMany(Project::class);
+    }
+
+    public function company() {
+        return $this->belongsTo(Company::class);
     }
 }

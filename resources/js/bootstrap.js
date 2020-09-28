@@ -10,21 +10,20 @@ import 'core-js';
 window.axios = require('axios');
 
 window.axios.default.create({
-    baseURL: process.env.APP_URL + '/api'
+  baseURL: process.env.APP_URL + '/api',
 });
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.withCredentials = true;
 
-axios.default.interceptors.request.use(function(config) {
-   const token = localStorage.getItem('token');
-   if (token) {
-       config.headers.common['Authorization'] = `Bearer ${token}`;
-   }
+window.axios.default.interceptors.request.use(function(config) {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.common['Authorization'] = `Bearer ${token}`;
+  }
 
-   return config;
+  return config;
 });
-
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

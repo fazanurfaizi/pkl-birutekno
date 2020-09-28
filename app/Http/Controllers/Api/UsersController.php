@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Gate;
 class UsersController extends Controller
 {
     public function me(Request $request) {
-        if(Gate::allows('view-client-dashboard')) {
-            return new UserResource($request->user());
-        }
+        return new UserResource($request->user());
     }
 
     public function changePassword(ChangePasswordRequest $request) {
@@ -43,7 +41,7 @@ class UsersController extends Controller
 
     public function changeDetails(ChangeDetailsRequest $request) {
         $user = User::findOrFail(Auth::user()->id);
-        $user->name = $request->name;
+        $user->fullname = $request->fullname;
         
         return response()->json([
             'message' => 'Update profile succesfully'

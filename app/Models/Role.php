@@ -28,4 +28,13 @@ class Role extends Model
     {
         return $query->where('slug', 'admin');
     }
+
+    /**
+     * Check whether current role is admin
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->name === Acl::ROLE_ADMIN;
+    }
 }

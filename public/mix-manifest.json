@@ -2,11 +2,9 @@
     "/js/app.js": "/js/app.js",
     "/js/manifest.js": "/js/manifest.js",
     "/js/vendor.js": "/js/vendor.js",
-    "/js/dashboard.37e03b.js": "/js/dashboard.37e03b.js",
-    "/js/forgotPassword.bc38a6.js": "/js/forgotPassword.bc38a6.js",
-    "/js/login.088fce.js": "/js/login.088fce.js",
-    "/js/profile.c7b65f.js": "/js/profile.c7b65f.js",
-    "/js/register.d73b92.js": "/js/register.d73b92.js",
-    "/js/resetPassword.d120ce.js": "/js/resetPassword.d120ce.js",
-    "/js/verifyEmail.0fff19.js": "/js/verifyEmail.0fff19.js"
+    "/js/forgotPassword.27a62a.js": "/js/forgotPassword.27a62a.js",
+    "/js/login.7fe85c.js": "/js/login.7fe85c.js",
+    "/js/register.6fcad2.js": "/js/register.6fcad2.js",
+    "/js/resetPassword.1a0cc1.js": "/js/resetPassword.1a0cc1.js",
+    "/js/verifyEmail.672549.js": "/js/verifyEmail.672549.js"
 }

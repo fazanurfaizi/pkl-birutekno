@@ -36,7 +36,6 @@ mix
     'axios',
     'vuex',
     'vue-router',
-    'element-ui',
   ])
   .options({
     processCssUrls: false,
